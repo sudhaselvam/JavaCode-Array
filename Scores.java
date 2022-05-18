@@ -1,0 +1,84 @@
+package dailypractice;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class Scores {
+
+	public static Map getOriginalGrades() {
+
+		Map grades = new HashMap();
+
+		grades.put("Angie", 24);
+
+		grades.put("Dave", 32);
+
+		grades.put("Lisi", 80);
+
+		grades.put("Raja", 50);
+
+		grades.put("Shashi", 79);
+
+		grades.put("Bas", 40);
+
+		grades.put("Carlos", 59);
+
+		grades.put("Amber", 55);
+
+		grades.put("Rex", 95);
+
+		grades.put("Jason", 63);
+
+		grades.put("Nikolay", 32);
+
+		return grades;
+
+	}
+
+	public static Map getMakeUpGrades() {
+		Map grades = new HashMap();
+		grades.put("Angie", 97);
+		grades.put("Dave", 82);
+		grades.put("Lisi", 76);
+		grades.put("Raja", 89);
+		grades.put("Shashi", 79);
+		grades.put("Bas", 98);
+		grades.put("Carlos", 80);
+		grades.put("Amber", 95);
+		grades.put("Rex", 90);
+		grades.put("Jason", 62);
+		grades.put("Nikolay", 79);
+		return grades;
+	}
+
+	public static Map finalScore() {
+		
+		
+		HashMap<String,Integer>finalUpgrade = new HashMap<String,Integer>();
+		
+		
+		Map<String, Integer> originalmap=Scores.getOriginalGrades();
+		Map<String, Integer> markupScore=Scores.getMakeUpGrades();
+		System.out.println(originalmap);
+		for(String key:originalmap.keySet()) {
+			if(originalmap.get(key)<markupScore.get(key)) {
+				originalmap.put(key, markupScore.get(key));
+				
+			}
+			
+		}
+		System.out.println(originalmap);
+		return originalmap;
+
+	}
+	
+	@Test
+	public void testcase() {
+		Assert.assertEquals(finalScore().toString(), "{Raja=89, Angie=97, Shashi=79, Amber=95, Rex=95, Bas=98, Lisi=80, Jason=63, Dave=82, Carlos=80, Nikolay=79}");
+	}
+
+}
